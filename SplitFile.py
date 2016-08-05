@@ -8,7 +8,7 @@ import os, sys
 if __name__=="__main__":
     argumentLen = len(sys.argv)
     filePath = ''
-    if argumentLen == 2:
+    if argumentLen >= 2:
         filePath = os.path.abspath(sys.argv[1])
     else:
         print 'Input file path please'
@@ -23,7 +23,7 @@ if __name__=="__main__":
     output = out_path + "//"+ pre_name +'_{0}.log'
     index = 0
     f = open(filePath)
-    maxCount = 500000
+    maxCount = int(sys.argv[2])
     lines = []
     count = 1
     while True:    
