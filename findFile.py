@@ -19,23 +19,20 @@ def search_file_in_dir(fileName, dirName):
     return returnList
 
 def parse_file(file_name):
-	keywords_1 = '@feature:'
-	keywords_2 = '@owner:'
-	splitFlag = ':'
-	
-	lines = linecache.getlines(file_name)[0:300]
-	for line in lines:
-		strline = ('').join(line)
-		nPos_1 = strline.find(keywords_1)
-		nPos_2 = strline.find(keywords_2)
-		if nPos_1 == 0:
-			result = strline.split(splitFlag)
-			tc_feature = result[1]
-			print tc_feature		
-		if nPos_2 == 0:
-			result_2 = strline.split(splitFlag)
-			tc_owner = result_2[1]
-			print tc_owner
+    keywords_1 = r'@feature: (.*)'
+    keywords_2 = r'@owner: (.*)'
+    
+    lines = linecache.getlines(file_name)[0:300]
+    for line in lines:
+        match_feature = re.match(keywords_1,line)
+        match_owner = re.match(keywords_2,line)
+        if match_feature:
+            feature = match_feature.group(1)        
+            print feature
+        
+        if match_owner:
+            owner = match_owner.group(1)
+            print owner
 
 if __name__ == "__main__":     
 	
